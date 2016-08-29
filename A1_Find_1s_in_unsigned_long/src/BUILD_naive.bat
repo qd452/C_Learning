@@ -1,0 +1,1 @@
+gcc -o Naive_solution.exe Naive_solution.c
