@@ -1014,11 +1014,11 @@ body .markdown-body
     page-break-after: avoid;
   }
 }
-</style><title>Find_1s_in_unsigned_long</title></head><body><article class="markdown-body"><h1 id="find_1s_in_unsigned_long-hamming-weight"><a name="user-content-find_1s_in_unsigned_long-hamming-weight" href="#find_1s_in_unsigned_long-hamming-weight" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>FIND_1S_IN_UNSIGNED_LONG - Hamming weight</h1>
+</style><title>Find_1s_in_unsigned_long</title></head><body><article class="markdown-body"><h1 id="find_1s_in_unsigned_long-hamming-weight"><a name="user-content-find_1s_in_unsigned_long-hamming-weight" href="#find_1s_in_unsigned_long-hamming-weight" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>FIND_1<sub>S</sub>_IN_UNSIGNED_LONG - Hamming weight</h1>
 <h2 id="table-of-contents"><a name="user-content-table-of-contents" href="#table-of-contents" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>TABLE OF CONTENTS</h2>
 <div class="toc">
 <ul>
-<li><a href="#find_1s_in_unsigned_long-hamming-weight">FIND_1S_IN_UNSIGNED_LONG - Hamming weight</a><ul>
+<li><a href="#find_1s_in_unsigned_long-hamming-weight">FIND_1<sub>S</sub>_IN_UNSIGNED_LONG - Hamming weight</a><ul>
 <li><a href="#table-of-contents">TABLE OF CONTENTS</a></li>
 <li><a href="#i-understanding-of-the-problem">I. UNDERSTANDING OF THE PROBLEM</a><ul>
 <li><a href="#1-basic-type-definition">1. Basic Type definition</a></li>
@@ -1031,9 +1031,16 @@ body .markdown-body
 </ul>
 </li>
 <li><a href="#iv-aiming-for-better-solutions">IV. Aiming for Better Solutions</a><ul>
-<li><a href="#1-difference-between-the-two-subtle-approaches">1. Difference Between the Two Subtle Approaches</a></li>
-<li><a href="#2-a-function-which-is-even-more-faster-than-above-two">2. A Function which is Even More Faster than Above Two</a><ul>
-<li><a href="#deterministic-clk">Deterministic (CLK)</a></li>
+<li><a href="#1-difference-between-the-two-subtle-approaches">1. Difference Between the Two Subtle Approaches</a><ul>
+<li><a href="#a-ternary-if-else-operator-for-loop">a. Ternary if else operator &amp; for loop</a></li>
+<li><a href="#b-logical-negation-operator-while-loop">b. logical negation operator ! &amp; while loop</a></li>
+</ul>
+</li>
+<li><a href="#2-a-function-which-is-faster-than-above-two">2. A Function which is Faster than Above Two</a></li>
+<li><a href="#brian-kernighans-algorithm">Brian Kernighan’s Algorithm</a></li>
+<li><a href="#using-lookup-table">Using Lookup table</a></li>
+<li><a href="#3-deterministic-clk">3. Deterministic (CLK)</a><ul>
+<li><a href="#timing-complexity">Timing Complexity</a></li>
 </ul>
 </li>
 </ul>
@@ -1072,18 +1079,78 @@ body .markdown-body
 <li>find 1&rsquo;s in unsigned long</li>
 <li><a href="http://www.geeksforgeeks.org/count-set-bits-in-an-integer/">GeeksforGeeks</a></li>
 <li><a href="http://codereview.stackexchange.com/questions/38182/counting-number-of-1s-and-0s-from-integer-with-bitwise-operation">codereview.stackexchange</a></li>
-<li><strong>[How to count the number of set bits in a 32-bit integer?]</strong>(<a href="http://stackoverflow.com/questions/109023/how-to-count-the-number-of-set-bits-in-a-32-bit-integer/109025#109025">http://stackoverflow.com/questions/109023/how-to-count-the-number-of-set-bits-in-a-32-bit-integer/109025#109025</a>)</li>
+<li><a href="http://stackoverflow.com/questions/109023/how-to-count-the-number-of-set-bits-in-a-32-bit-integer/109025#109025"><strong>How to count the number of set bits in a 32-bit integer?</strong></a></li>
+<li><a href="http://www.cplusplus.com/doc/tutorial/operators/">C++ Operators</a></li>
+<li><a href="http://stackoverflow.com/questions/2319766/how-does-logical-negation-work-in-c">How does logical negation work in C?</a></li>
 <li><strong>Deterministic system</strong>: In mathematics and physics, a deterministic system is a system in which no randomness is involved in the development of future states of the system.<a href="https://en.wikipedia.org/wiki/Deterministic_system">1</a> A deterministic model will thus always produce the same output from a given starting condition or initial state<sup><a href="https://en.wikipedia.org/wiki/Deterministic_system">wiki</a></sup></li>
+<li><a href="https://www.khanacademy.org/computing/computer-science/algorithms/asymptotic-notation/a/big-big-theta-notation">Big-Theta notation</a></li>
+<li><a href="http://stackoverflow.com/questions/471199/what-is-the-difference-between-%CE%98n-and-on">What is the difference between Θ(n) and O(n)?</a></li>
+<li><a href="http://stackoverflow.com/questions/14095510/could-anyone-explain-big-o-versus-big-omega-vs-big-theta">More on Big O and Big Omega and Big Theta</a></li>
 </ol>
 <h2 id="iii-literature-review"><a name="user-content-iii-literature-review" href="#iii-literature-review" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>III. LITERATURE REVIEW</h2>
 <h3 id="hamming-weight"><a name="user-content-hamming-weight" href="#hamming-weight" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Hamming Weight</h3>
 <p>[todo-qd]: Some IEEE paper or whatever stuff</p>
 <h2 id="iv-aiming-for-better-solutions"><a name="user-content-iv-aiming-for-better-solutions" href="#iv-aiming-for-better-solutions" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>IV. Aiming for Better Solutions</h2>
 <h3 id="1-difference-between-the-two-subtle-approaches"><a name="user-content-1-difference-between-the-two-subtle-approaches" href="#1-difference-between-the-two-subtle-approaches" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>1. Difference Between the Two Subtle Approaches</h3>
-<h3 id="2-a-function-which-is-even-more-faster-than-above-two"><a name="user-content-2-a-function-which-is-even-more-faster-than-above-two" href="#2-a-function-which-is-even-more-faster-than-above-two" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>2. A Function which is Even More Faster than Above Two</h3>
-<h4 id="deterministic-clk"><a name="user-content-deterministic-clk" href="#deterministic-clk" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Deterministic (CLK)</h4>
-<p>[todo-qd] how to prove: in python can use <code>timeit</code> to do the timing analysis</p>
+<h4 id="a-ternary-if-else-operator-for-loop"><a name="user-content-a-ternary-if-else-operator-for-loop" href="#a-ternary-if-else-operator-for-loop" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>a. Ternary <code>if else</code> operator &amp; <code>for</code> loop</h4>
+<pre><code>for (i = 0; i &lt; 32; i++) {
+        cnt += (var &amp; 0x01) ? 1 : 0;
+        var &gt;&gt;= 1;
+    }
+</code></pre>
+
+<p>In this approach, the iteration logic is using <code>for</code> loop to iterate through the entire bits (32-bit) of the input variable, which could be inefficient in the case of the input variable is smaller than 0x80000000 (the rightmost set bit is not the MSB).</p>
+<p>And <code>?:</code> is a ternary operator that is part of the syntax for a basic conditional expression in C/C++. The <code>conditions</code> is evaluated true or fals as a Boolean expression <em>(no built-in type of <code>bool</code> in C)</em> </p>
+<p><em><code>variable = condition ? value_if_true : value_if_false</code></em></p>
+<blockquote>
+<p><strong>Note</strong>: In C++ there are conditional assignment situations where use of the if-else statement is impossible, since this language explicitly distinguishes between initialization and assignment. In such case it is always possible to use a function call, but this can be cumbersome and inelegant. For example, to pass conditionally different values as an argument for a constructor of a field or a base class, it is impossible to use a plain if-else statement; in this case we can use a conditional assignment expression, or a function call. Bear in mind also that some types allow initialization, but do not allow assignment, or even that the assignment operator and the constructor do totally different things. <sup><a href="https://en.wikipedia.org/wiki/%3F:#C.2B.2B">wiki</a></sup></p>
+</blockquote>
+<h4 id="b-logical-negation-operator-while-loop"><a name="user-content-b-logical-negation-operator-while-loop" href="#b-logical-negation-operator-while-loop" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>b. logical negation operator <code>!</code> &amp; <code>while</code> loop</h4>
+<pre><code>    while (var) {
+        cnt += !!(var &amp; 0x01);
+        var &gt;&gt;= 1;
+    }
+</code></pre>
+
+<p>In terms of the algorithm efficiency, <code>while</code> is an improvement in this case compared to loop through all the bits; the looping basically stops when it hits the the rightmost set bit of <code>var</code>. </p>
+<p>And the logical negation operator (!) reverses the meaning of its operand. <strong>To be noted</strong> that in C++, the operand is implicitly converted to type <strong>bool</strong>. The result is <strong>true</strong> if the converted operand is <strong>false</strong>; the result is <strong>false</strong> if the converted operand is true. The result is of type <strong>bool</strong>.<sup><a href="https://en.wikipedia.org/wiki/%3F:#C.2B.2B">MSDN</a></sup></p>
+<p>So in this case, in C, <code>!e</code> can be replaced by <code>((e)?:0:1)</code>. Therefore, <code>!!e</code> can be replaced by <code>((e)?1:0)</code>, which is actually equivalent with the first approach of using ternary <code>if else</code> operator.</p>
+<h3 id="2-a-function-which-is-faster-than-above-two"><a name="user-content-2-a-function-which-is-faster-than-above-two" href="#2-a-function-which-is-faster-than-above-two" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>2. A Function which is Faster than Above Two</h3>
+<h3 id="brian-kernighans-algorithm"><a name="user-content-brian-kernighans-algorithm" href="#brian-kernighans-algorithm" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Brian Kernighan’s Algorithm</h3>
+<pre><code>while (var) {
+        var &amp;= (var - 1);
+        cnt++;
+    }
+</code></pre>
+
+<p>The Subtle part regarding this algorithm is that it can actually loop through the from rightmost to the leftmost while skipping through non-set bits. So in the case of <code>var = 9;</code>, it only requires 2 loops while for the subtle approach 2, it still need 4 loops (from leftmost to the rightmost). </p>
+<h3 id="using-lookup-table"><a name="user-content-using-lookup-table" href="#using-lookup-table" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Using Lookup table</h3>
+<p>We can count bits in <strong>O(1)</strong> time using lookup table. Please see <a href="http://graphics.stanford.edu/~seander/bithacks.html#CountBitsSetTable">http://graphics.stanford.edu/~seander/bithacks.html#CountBitsSetTable</a> for details.</p>
+<h3 id="3-deterministic-clk"><a name="user-content-3-deterministic-clk" href="#3-deterministic-clk" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>3. Deterministic (CLK)</h3>
+<ul>
+<li>
+<p>Subtle Approach 1: Linear O(N)</p>
+</li>
+<li>
+<p>Subtle Approach 2: Log Theta(log(N)) (Theta of log(N))</p>
+</li>
+<li>
+<p>Brian Kernighan’s Algorithm: Log O(log(N))</p>
+</li>
+<li>
+<p>Lookup table: Constant O(1)</p>
+</li>
+</ul>
+<h5 id="timing-complexity"><a name="user-content-timing-complexity" href="#timing-complexity" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Timing Complexity</h5>
 <h2 id="v-summary"><a name="user-content-v-summary" href="#v-summary" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>V. SUMMARY</h2>
-<p>[todo-qd]</p>
+<ol>
+<li>Through these two subtle code, my knowledge on C/C++ get brushed up and realized the importance of understanding the fundamental knowledge of the language.</li>
+<li>Hamming weight problem </li>
+<li>O(n) represents upper bound. Θ(n) means tight bound. Ω(n) represents lower bound.</li>
+</ol>
 <h2 id="vi-future-work"><a name="user-content-vi-future-work" href="#vi-future-work" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>VI. FUTURE WORK</h2>
-<p>[todo-qd]</p></article></body></html>
+<ol>
+<li>To <a href="http://stackoverflow.com/questions/6280055/how-do-i-check-if-a-variable-is-of-a-certain-type-compare-two-types-in-c">check the type in C</a>. Generally unlike in <code>Python</code>, I could directly use <code>type()</code> to check the type, I could <em>however check the size of a variable using the <code>sizeof()</code> function. This may help me determine the type of data.</em> This may help me get a deeper understanding of the all the operators <em>(<code>+=</code>, <code>!!</code>, <code>?:</code> etc)</em> and their difference in C and C++.</li>
+<li><a href="http://algs4.cs.princeton.edu/14analysis/">Memory usage</a></li>
+<li>Timing Analysis from the code level. How to prove: in python can use <code>timeit</code> to do the timing analysis. Need to include all the test cases.</li>
+</ol></article></body></html>

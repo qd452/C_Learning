@@ -1,0 +1,1 @@
+gcc -o two_subtle_solutions.exe two_subtle_solutions.c
