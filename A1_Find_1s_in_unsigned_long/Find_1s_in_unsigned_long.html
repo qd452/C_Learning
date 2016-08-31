@@ -1037,8 +1037,8 @@ body .markdown-body
 </ul>
 </li>
 <li><a href="#2-a-function-which-is-faster-than-above-two">2. A Function which is Faster than Above Two</a></li>
-<li><a href="#brian-kernighans-algorithm">Brian Kernighan’s Algorithm</a></li>
-<li><a href="#using-lookup-table">Using Lookup table</a></li>
+<li><a href="#a-brian-kernighans-algorithm">a. Brian Kernighan’s Algorithm</a></li>
+<li><a href="#b-using-lookup-table">b. Using Lookup table</a></li>
 <li><a href="#3-deterministic-clk">3. Deterministic (CLK)</a><ul>
 <li><a href="#timing-complexity">Timing Complexity</a></li>
 </ul>
@@ -1116,7 +1116,7 @@ body .markdown-body
 <p>And the logical negation operator (!) reverses the meaning of its operand. <strong>To be noted</strong> that in C++, the operand is implicitly converted to type <strong>bool</strong>. The result is <strong>true</strong> if the converted operand is <strong>false</strong>; the result is <strong>false</strong> if the converted operand is true. The result is of type <strong>bool</strong>.<sup><a href="https://en.wikipedia.org/wiki/%3F:#C.2B.2B">MSDN</a></sup></p>
 <p>So in this case, in C, <code>!e</code> can be replaced by <code>((e)?:0:1)</code>. Therefore, <code>!!e</code> can be replaced by <code>((e)?1:0)</code>, which is actually equivalent with the first approach of using ternary <code>if else</code> operator.</p>
 <h3 id="2-a-function-which-is-faster-than-above-two"><a name="user-content-2-a-function-which-is-faster-than-above-two" href="#2-a-function-which-is-faster-than-above-two" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>2. A Function which is Faster than Above Two</h3>
-<h3 id="brian-kernighans-algorithm"><a name="user-content-brian-kernighans-algorithm" href="#brian-kernighans-algorithm" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Brian Kernighan’s Algorithm</h3>
+<h3 id="a-brian-kernighans-algorithm"><a name="user-content-a-brian-kernighans-algorithm" href="#a-brian-kernighans-algorithm" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>a. Brian Kernighan’s Algorithm</h3>
 <pre><code>while (var) {
         var &amp;= (var - 1);
         cnt++;
@@ -1124,24 +1124,24 @@ body .markdown-body
 </code></pre>
 
 <p>The Subtle part regarding this algorithm is that it can actually loop through the from rightmost to the leftmost while skipping through non-set bits. So in the case of <code>var = 9;</code>, it only requires 2 loops while for the subtle approach 2, it still need 4 loops (from leftmost to the rightmost). </p>
-<h3 id="using-lookup-table"><a name="user-content-using-lookup-table" href="#using-lookup-table" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Using Lookup table</h3>
+<h3 id="b-using-lookup-table"><a name="user-content-b-using-lookup-table" href="#b-using-lookup-table" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>b. Using Lookup table</h3>
 <p>We can count bits in <strong>O(1)</strong> time using lookup table. Please see <a href="http://graphics.stanford.edu/~seander/bithacks.html#CountBitsSetTable">http://graphics.stanford.edu/~seander/bithacks.html#CountBitsSetTable</a> for details.</p>
 <h3 id="3-deterministic-clk"><a name="user-content-3-deterministic-clk" href="#3-deterministic-clk" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>3. Deterministic (CLK)</h3>
+<h5 id="timing-complexity"><a name="user-content-timing-complexity" href="#timing-complexity" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Timing Complexity</h5>
 <ul>
 <li>
-<p>Subtle Approach 1: Linear O(N)</p>
+<p><strong>Subtle Approach 1 (Ternary and for loop)</strong>: Linear -&gt; O(N)</p>
 </li>
 <li>
-<p>Subtle Approach 2: Log Theta(log(N)) (Theta of log(N))</p>
+<p><strong>Subtle Approach 2 (logical negation and while)</strong>: Logarithmic -&gt; Theta(log(N)) (Theta of log(N))</p>
 </li>
 <li>
-<p>Brian Kernighan’s Algorithm: Log O(log(N))</p>
+<p><strong>Brian Kernighan’s Algorithm</strong>: Logarithmic -&gt; O(log(N))</p>
 </li>
 <li>
-<p>Lookup table: Constant O(1)</p>
+<p><strong>Lookup table</strong>: Constant -&gt; O(1)</p>
 </li>
 </ul>
-<h5 id="timing-complexity"><a name="user-content-timing-complexity" href="#timing-complexity" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Timing Complexity</h5>
 <h2 id="v-summary"><a name="user-content-v-summary" href="#v-summary" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>V. SUMMARY</h2>
 <ol>
 <li>Through these two subtle code, my knowledge on C/C++ get brushed up and realized the importance of understanding the fundamental knowledge of the language.</li>

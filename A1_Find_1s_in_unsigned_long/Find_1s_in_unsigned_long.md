@@ -84,7 +84,7 @@ So in this case, in C, `!e` can be replaced by `((e)?:0:1)`. Therefore, `!!e` ca
 
 ### 2. A Function which is Faster than Above Two
 
-### Brian Kernighan’s Algorithm
+### a. Brian Kernighan’s Algorithm
 
 ```
 while (var) {
@@ -95,23 +95,21 @@ while (var) {
 
 The Subtle part regarding this algorithm is that it can actually loop through the from rightmost to the leftmost while skipping through non-set bits. So in the case of `var = 9;`, it only requires 2 loops while for the subtle approach 2, it still need 4 loops (from leftmost to the rightmost). 
 
-### Using Lookup table
+### b. Using Lookup table
 
 We can count bits in **O(1)** time using lookup table. Please see http://graphics.stanford.edu/~seander/bithacks.html#CountBitsSetTable for details.
 
 ### 3. Deterministic (CLK)
 
-- Subtle Approach 1: Linear O(N)
-
-- Subtle Approach 2: Log Theta(log(N)) (Theta of log(N))
-
-- Brian Kernighan’s Algorithm: Log O(log(N))
-
-- Lookup table: Constant O(1)
-
-
 ##### Timing Complexity
 
+- **Subtle Approach 1 (Ternary and for loop)**: Linear -> O(N)
+
+- **Subtle Approach 2 (logical negation and while)**: Logarithmic -> Theta(log(N)) (Theta of log(N))
+
+- **Brian Kernighan’s Algorithm**: Logarithmic -> O(log(N))
+
+- **Lookup table**: Constant -> O(1)
 
 
 ## V. SUMMARY
