@@ -2,25 +2,25 @@
 
 ## TABLE OF CONTENTS
 
-<!-- MarkdownTOC -->
+<!-- MarkdownTOC autolink="true" bracket="round" -->
 
-- [I. UNDERSTANDING OF THE PROBLEM][i-understanding-of-the-problem]
-    - [1. Basic Type definition][1-basic-type-definition]
-    - [2. Naive Approach][2-naive-approach]
-- [II. GOOGLE KEYWORDS][ii-google-keywords]
-- [III. LITERATURE REVIEW][iii-literature-review]
-    - [Hamming Weight][hamming-weight]
-- [IV. Aiming for Better Solutions][iv-aiming-for-better-solutions]
-    - [1. Difference Between the Two Subtle Approaches][1-difference-between-the-two-subtle-approaches]
-        - [a. Ternary `if else` operator & `for` loop][a-ternary-if-else-operator--for-loop]
-        - [b. logical negation operator `!` & `while` loop][b-logical-negation-operator---while-loop]
-    - [2. A Function which is Faster than Above Two][2-a-function-which-is-faster-than-above-two]
-    - [a. Brian Kernighan’s Algorithm][a-brian-kernighan’s-algorithm]
-    - [b. Using Lookup table][b-using-lookup-table]
-    - [3. Deterministic \(CLK\)][3-deterministic-clk]
-            - [Timing Complexity][timing-complexity]
-- [V. SUMMARY][v-summary]
-- [VI. FUTURE WORK][vi-future-work]
+- [I. UNDERSTANDING OF THE PROBLEM](#i-understanding-of-the-problem)
+    - [1. Basic Type definition](#1-basic-type-definition)
+    - [2. Naive Approach](#2-naive-approach)
+- [II. GOOGLE KEYWORDS](#ii-google-keywords)
+- [III. LITERATURE REVIEW](#iii-literature-review)
+    - [Hamming Weight](#hamming-weight)
+- [IV. Aiming for Better Solutions](#iv-aiming-for-better-solutions)
+    - [1. Difference Between the Two Subtle Approaches](#1-difference-between-the-two-subtle-approaches)
+        - [a. Ternary `if else` operator & `for` loop](#a-ternary-if-else-operator--for-loop)
+        - [b. logical negation operator `!` & `while` loop](#b-logical-negation-operator---while-loop)
+    - [2. A Function which is Faster than Above Two](#2-a-function-which-is-faster-than-above-two)
+    - [a. Brian Kernighan’s Algorithm](#a-brian-kernighan’s-algorithm)
+    - [b. Using Lookup table](#b-using-lookup-table)
+    - [3. Deterministic \(CLK\)](#3-deterministic-clk)
+            - [Timing Complexity](#timing-complexity)
+- [V. SUMMARY](#v-summary)
+- [VI. FUTURE WORK](#vi-future-work)
 
 <!-- /MarkdownTOC -->
 
