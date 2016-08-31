@@ -2,10 +2,33 @@
 
 ## TABLE OF CONTENTS
 
-[TOC]
+<!-- MarkdownTOC -->
 
+- [I. UNDERSTANDING OF THE PROBLEM][i-understanding-of-the-problem]
+    - [1. Basic Type definition][1-basic-type-definition]
+    - [2. Naive Approach][2-naive-approach]
+- [II. GOOGLE KEYWORDS][ii-google-keywords]
+- [III. LITERATURE REVIEW][iii-literature-review]
+    - [Hamming Weight][hamming-weight]
+- [IV. Aiming for Better Solutions][iv-aiming-for-better-solutions]
+    - [1. Difference Between the Two Subtle Approaches][1-difference-between-the-two-subtle-approaches]
+        - [a. Ternary `if else` operator & `for` loop][a-ternary-if-else-operator--for-loop]
+        - [b. logical negation operator `!` & `while` loop][b-logical-negation-operator---while-loop]
+    - [2. A Function which is Faster than Above Two][2-a-function-which-is-faster-than-above-two]
+    - [a. Brian Kernighan’s Algorithm][a-brian-kernighan’s-algorithm]
+    - [b. Using Lookup table][b-using-lookup-table]
+    - [3. Deterministic \(CLK\)][3-deterministic-clk]
+            - [Timing Complexity][timing-complexity]
+- [V. SUMMARY][v-summary]
+- [VI. FUTURE WORK][vi-future-work]
+
+<!-- /MarkdownTOC -->
+
+
+<a name="i-understanding-of-the-problem"></a>
 ## I. UNDERSTANDING OF THE PROBLEM
 
+<a name="1-basic-type-definition"></a>
 ### 1. Basic Type definition
 
 ``` 
@@ -21,10 +44,12 @@ unsigned long var; // 32-bit, 4-bytes
 
 - According to [C++ standard](http://en.cppreference.com/w/cpp/language/types), `unsigned long` must be at least 32-bit.
 
+<a name="2-naive-approach"></a>
 ### 2. Naive Approach
 
 I **really** should have started to process my code from LSB instead of MSB...
 
+<a name="ii-google-keywords"></a>
 ## II. GOOGLE KEYWORDS
 
 1. find 1's in unsigned long
@@ -39,17 +64,22 @@ I **really** should have started to process my code from LSB instead of MSB...
 10. [More on Big O and Big Omega and Big Theta](http://stackoverflow.com/questions/14095510/could-anyone-explain-big-o-versus-big-omega-vs-big-theta)
 
 
+<a name="iii-literature-review"></a>
 ## III. LITERATURE REVIEW
 
+<a name="hamming-weight"></a>
 ### Hamming Weight
 
 
 [todo-qd]: Some IEEE paper or whatever stuff
 
+<a name="iv-aiming-for-better-solutions"></a>
 ## IV. Aiming for Better Solutions
 
+<a name="1-difference-between-the-two-subtle-approaches"></a>
 ### 1. Difference Between the Two Subtle Approaches
 
+<a name="a-ternary-if-else-operator--for-loop"></a>
 #### a. Ternary `if else` operator & `for` loop
 
 ```
@@ -67,6 +97,7 @@ And `?:` is a ternary operator that is part of the syntax for a basic conditiona
 
 > **Note**: In C++ there are conditional assignment situations where use of the if-else statement is impossible, since this language explicitly distinguishes between initialization and assignment. In such case it is always possible to use a function call, but this can be cumbersome and inelegant. For example, to pass conditionally different values as an argument for a constructor of a field or a base class, it is impossible to use a plain if-else statement; in this case we can use a conditional assignment expression, or a function call. Bear in mind also that some types allow initialization, but do not allow assignment, or even that the assignment operator and the constructor do totally different things. <sup>[wiki][2]</sup>
 
+<a name="b-logical-negation-operator---while-loop"></a>
 #### b. logical negation operator `!` & `while` loop
 
 ```
@@ -82,8 +113,10 @@ And the logical negation operator (!) reverses the meaning of its operand. **To 
 
 So in this case, in C, `!e` can be replaced by `((e)?:0:1)`. Therefore, `!!e` can be replaced by `((e)?1:0)`, which is actually equivalent with the first approach of using ternary `if else` operator.
 
+<a name="2-a-function-which-is-faster-than-above-two"></a>
 ### 2. A Function which is Faster than Above Two
 
+<a name="a-brian-kernighan’s-algorithm"></a>
 ### a. Brian Kernighan’s Algorithm
 
 ```
@@ -95,12 +128,15 @@ while (var) {
 
 The Subtle part regarding this algorithm is that it can actually loop through the from rightmost to the leftmost while skipping through non-set bits. So in the case of `var = 9;`, it only requires 2 loops while for the subtle approach 2, it still need 4 loops (from leftmost to the rightmost). 
 
+<a name="b-using-lookup-table"></a>
 ### b. Using Lookup table
 
 We can count bits in **O(1)** time using lookup table. Please see http://graphics.stanford.edu/~seander/bithacks.html#CountBitsSetTable for details.
 
+<a name="3-deterministic-clk"></a>
 ### 3. Deterministic (CLK)
 
+<a name="timing-complexity"></a>
 ##### Timing Complexity
 
 - **Subtle Approach 1 (Ternary and for loop)**: Linear -> O(N)
@@ -112,12 +148,14 @@ We can count bits in **O(1)** time using lookup table. Please see http://graphic
 - **Lookup table**: Constant -> O(1)
 
 
+<a name="v-summary"></a>
 ## V. SUMMARY
 
 1. Through these two subtle code, my knowledge on C/C++ get brushed up and realized the importance of understanding the fundamental knowledge of the language.
 2. Hamming weight problem 
 3. O(n) represents upper bound. Θ(n) means tight bound. Ω(n) represents lower bound.
 
+<a name="vi-future-work"></a>
 ## VI. FUTURE WORK
 
 1. To [check the type in C](http://stackoverflow.com/questions/6280055/how-do-i-check-if-a-variable-is-of-a-certain-type-compare-two-types-in-c). Generally unlike in `Python`, I could directly use `type()` to check the type, I could *however check the size of a variable using the `sizeof()` function. This may help me determine the type of data.* This may help me get a deeper understanding of the all the operators *(`+=`, `!!`, `?:` etc)* and their difference in C and C++.
