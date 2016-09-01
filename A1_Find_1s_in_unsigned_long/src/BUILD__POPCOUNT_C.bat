@@ -1,0 +1,1 @@
+gcc -o popcount_c.exe popcount_c.c

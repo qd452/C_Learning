@@ -37,8 +37,9 @@ int main()
 /**
  * @brief starting from the LSB and kind of one-liner using (?:) bitwise operation
  *
- * @note Here it loops through all the 32-bit no matter how, timing complexity is linear, O(var)
- *
+ * @note Here it loops through all the 32-bit no matter how, timing complexity is linear, O(n).
+ *       and the deterministic is the var type bit size, in this case it is 32
+ *  
  * @param   value     32-bit unsigned long input value
  * @return  count     number of one's
  */
@@ -58,7 +59,9 @@ int CountOnesFromulong32_t_1(ulong32_t var)
  * @brief starting from the LSB and using negation operator (!) just reverses the meaning of tis operand.
  *
  * @note Here due to the while() loop, it actually stops when hit MSB and doesn't have to loop through all,
-         timing complexity is Theta(log(var)) (Theta of log(var))
+ *       timing complexity is Theta(log(n)) (Theta of log(n)), where n is the total number of bits from 
+ *       the rightmost set bit to the leftmost set bit. And the total number of loops (deterministic) is 
+ *       the total number of bits from the most right set bit to the LSB.
  *
  * @param   value     32-bit unsigned long input value
  * @return  count     number of one's
@@ -78,7 +81,9 @@ int CountOnesFromulong32_t_2(ulong32_t var)
 /**
  * @brief Brian Kernighan’s Algorithm
  *
- * @note Timing Complexity: O(log(var))
+ * @note The subtle part about this algorithm is that it has timing Complexity of O(log(n))
+ *       which means that number of times it loops (deterministic) is actually equal to the number
+ *       of set bits in the given input integer.
  *
  * @param   value     32-bit unsigned long input value
  * @return  count     number of one's

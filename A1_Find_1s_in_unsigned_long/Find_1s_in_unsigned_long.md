@@ -11,14 +11,15 @@
 - [III. LITERATURE REVIEW](#iii-literature-review)
     - [Hamming Weight](#hamming-weight)
 - [IV. Aiming for Better Solutions](#iv-aiming-for-better-solutions)
-    - [1. Difference Between the Two Subtle Approaches](#1-difference-between-the-two-subtle-approaches)
-        - [a. Ternary `if else` operator & `for` loop](#a-ternary-if-else-operator--for-loop)
-        - [b. logical negation operator `!` & `while` loop](#b-logical-negation-operator---while-loop)
+    - [1. Difference Between the Two Approaches](#1-difference-between-the-two-approaches)
+        - [a. Naive Approach: Ternary `if else` operator & `for` loop](#a-naive-approach-ternary-if-else-operator--for-loop)
+        - [b. Simple Approach: logical negation operator `!` & `while` loop](#b-simple-approach-logical-negation-operator---while-loop)
     - [2. A Function which is Faster than Above Two](#2-a-function-which-is-faster-than-above-two)
-    - [a. Brian Kernighan’s Algorithm](#a-brian-kernighan’s-algorithm)
-    - [b. Using Lookup table](#b-using-lookup-table)
+        - [a. Brian Kernighan’s Algorithm](#a-brian-kernighan’s-algorithm)
+        - [b. Lookup table](#b-lookup-table)
     - [3. Deterministic \(CLK\)](#3-deterministic-clk)
-            - [Timing Complexity](#timing-complexity)
+        - [Timing Complexity](#timing-complexity)
+        - [Summary Table](#summary-table)
 - [V. SUMMARY](#v-summary)
 - [VI. FUTURE WORK](#vi-future-work)
 
@@ -62,6 +63,7 @@ I **really** should have started to process my code from LSB instead of MSB...
 8. [Big-Theta notation](https://www.khanacademy.org/computing/computer-science/algorithms/asymptotic-notation/a/big-big-theta-notation)
 9. [What is the difference between Θ(n) and O(n)?](http://stackoverflow.com/questions/471199/what-is-the-difference-between-%CE%98n-and-on)
 10. [More on Big O and Big Omega and Big Theta](http://stackoverflow.com/questions/14095510/could-anyone-explain-big-o-versus-big-omega-vs-big-theta)
+11. **A Really Comprehensive Study on ** [Bit Twiddling Hacks & Counting bits set](http://graphics.stanford.edu/~seander/bithacks.html#CountBitsSetTable)
 
 
 <a name="iii-literature-review"></a>
@@ -76,11 +78,11 @@ I **really** should have started to process my code from LSB instead of MSB...
 <a name="iv-aiming-for-better-solutions"></a>
 ## IV. Aiming for Better Solutions
 
-<a name="1-difference-between-the-two-subtle-approaches"></a>
-### 1. Difference Between the Two Subtle Approaches
+<a name="1-difference-between-the-two-approaches"></a>
+### 1. Difference Between the Two Approaches
 
-<a name="a-ternary-if-else-operator--for-loop"></a>
-#### a. Ternary `if else` operator & `for` loop
+<a name="a-naive-approach-ternary-if-else-operator--for-loop"></a>
+#### a. Naive Approach: Ternary `if else` operator & `for` loop
 
 ```
 for (i = 0; i < 32; i++) {
@@ -97,8 +99,8 @@ And `?:` is a ternary operator that is part of the syntax for a basic conditiona
 
 > **Note**: In C++ there are conditional assignment situations where use of the if-else statement is impossible, since this language explicitly distinguishes between initialization and assignment. In such case it is always possible to use a function call, but this can be cumbersome and inelegant. For example, to pass conditionally different values as an argument for a constructor of a field or a base class, it is impossible to use a plain if-else statement; in this case we can use a conditional assignment expression, or a function call. Bear in mind also that some types allow initialization, but do not allow assignment, or even that the assignment operator and the constructor do totally different things. <sup>[wiki][2]</sup>
 
-<a name="b-logical-negation-operator---while-loop"></a>
-#### b. logical negation operator `!` & `while` loop
+<a name="b-simple-approach-logical-negation-operator---while-loop"></a>
+#### b. Simple Approach: logical negation operator `!` & `while` loop
 
 ```
     while (var) {
@@ -117,7 +119,7 @@ So in this case, in C, `!e` can be replaced by `((e)?:0:1)`. Therefore, `!!e` ca
 ### 2. A Function which is Faster than Above Two
 
 <a name="a-brian-kernighan’s-algorithm"></a>
-### a. Brian Kernighan’s Algorithm
+#### a. Brian Kernighan’s Algorithm
 
 ```
 while (var) {
@@ -126,10 +128,10 @@ while (var) {
     }
 ```
 
-The Subtle part regarding this algorithm is that it can actually loop through the from rightmost to the leftmost while skipping through non-set bits. So in the case of `var = 9;`, it only requires 2 loops while for the subtle approach 2, it still need 4 loops (from leftmost to the rightmost). 
+The Subtle part regarding this algorithm is that it can actually loop through the from rightmost set bit to the leftmost set bit while skipping through non-set bits. So in the case of `var = 9;`, it only requires 2 loops while for the subtle approach 2, it still need 4 loops (from leftmost to the rightmost). 
 
-<a name="b-using-lookup-table"></a>
-### b. Using Lookup table
+<a name="b-lookup-table"></a>
+#### b. Lookup table
 
 We can count bits in **O(1)** time using lookup table. Please see http://graphics.stanford.edu/~seander/bithacks.html#CountBitsSetTable for details.
 
@@ -137,15 +139,25 @@ We can count bits in **O(1)** time using lookup table. Please see http://graphic
 ### 3. Deterministic (CLK)
 
 <a name="timing-complexity"></a>
-##### Timing Complexity
+#### Timing Complexity
 
-- **Subtle Approach 1 (Ternary and for loop)**: Linear -> O(N)
+- **Subtle Approach 1 (Ternary and for loop)**: Linear -> O(n)
 
-- **Subtle Approach 2 (logical negation and while)**: Logarithmic -> Theta(log(N)) (Theta of log(N))
+- **Subtle Approach 2 (logical negation and while)**: Logarithmic -> Theta(log(n)) (Theta of log(n))
 
-- **Brian Kernighan’s Algorithm**: Logarithmic -> O(log(N))
+- **Brian Kernighan’s Algorithm**: Logarithmic -> O(log(n))
 
-- **Lookup table**: Constant -> O(1)
+- **Lookup table**: Constant -> O(1) *[todo-qd]: implement the C/C++ code*
+
+<a name="summary-table"></a>
+#### Summary Table
+
+| Approach     | Description  | Order-of-growth | Deterministic| Explanation | 
+| ------------ | ------------ | ------------    | ------------ | ----------- | 
+| Naive Approach   | a `for` loop with 32 iterations | Θ(n), where n is the number of bits of input type | 32 for ulong32_t | it will just loop for 32 times no matter how, for example `var=9;`, it will still loop 32 times |
+| Simple Approach  | a `while` loop | Θ(log<sub>2</sub>(n)), where n is the number of bits from rightmost set bit to the LSB | it will just loop for total bits from rightmost set bit to LSB | for example `var=9;`, it will loop 4 times since `9 == 0x1001` |
+| BK's Algo    | gradually removes the rightmost set bit from input | O(log<sub>2</sub>(n)), where n is the number of bits from rightmost set bit to the LSB | #iteration is equal to the number of set bits in the given input integer| for instance in the case of `var=9;`, it will loop 2 times since 9 has only two set bits|
+| Lookup table |   __builtin_popcount() | O(1)   |  1 |  In GCC, we can directly count set bits using __builtin_popcount(). So we can avoid a separate function for counting set bits.|
 
 
 <a name="v-summary"></a>
@@ -161,6 +173,7 @@ We can count bits in **O(1)** time using lookup table. Please see http://graphic
 1. To [check the type in C](http://stackoverflow.com/questions/6280055/how-do-i-check-if-a-variable-is-of-a-certain-type-compare-two-types-in-c). Generally unlike in `Python`, I could directly use `type()` to check the type, I could *however check the size of a variable using the `sizeof()` function. This may help me determine the type of data.* This may help me get a deeper understanding of the all the operators *(`+=`, `!!`, `?:` etc)* and their difference in C and C++.
 2. [Memory usage](http://algs4.cs.princeton.edu/14analysis/)
 3. Timing Analysis from the code level. How to prove: in python can use `timeit` to do the timing analysis. Need to include all the test cases.
+4. **Computer Architecture**
 
 
 
