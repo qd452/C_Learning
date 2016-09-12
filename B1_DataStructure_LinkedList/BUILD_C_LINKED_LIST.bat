@@ -1,0 +1,1 @@
+gcc -o C_LinkedList.exe C_LinkedList.c
