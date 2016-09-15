@@ -31,3 +31,4 @@
 # Debug files
 *.dSYM/
 *.su
+/A1_Find_1s_in_unsigned_long/*.html
